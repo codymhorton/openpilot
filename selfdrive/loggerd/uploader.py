@@ -18,6 +18,8 @@ from selfdrive.loggerd.config import ROOT
 from common.params import Params
 from common.api import api_get
 
+from selfdrive.loggerd.google_drive import google_drive_upload
+
 fake_upload = os.getenv("FAKEUPLOAD") is not None
 
 def raise_on_thread(t, exctype):
@@ -221,6 +223,12 @@ class Uploader(object):
       os.unlink(fn) # delete the file
       success = True
     else:
+      #Google Drive addition
+      drivesuccess = google_drive_upload(fn)
+      if drivesuccess is None:
+        success = False
+        return sucess
+
       cloudlog.info("uploading %r", fn)
       # stat = self.killable_upload(key, fn)
       stat = self.normal_upload(key, fn)

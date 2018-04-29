@@ -28,3 +28,5 @@ selfdrive/proclogd/proclogd
 selfdrive/ui/ui
 /src/
 
+selfdrive/loggerd/cred
+selfdrive/loggerd/client_secret.json
